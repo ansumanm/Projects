@@ -1,0 +1,13 @@
+Examples taken from :-
+http://ds9a.nl/lex-yacc/cvs/lex-yacc-howto.html
+
+Just type "make" to build all the binaries.
+"make clean" to  clean all the generated files.
+
+Summary: 
+1) lex parses a stream of strings and generates
+tokens.i
+2) Yacc parses tokens and takes actions if a rule 
+is satisfied.
+3) Whenever Lex matches a target, it puts the 
+text of the match in the character string 'yytext'
