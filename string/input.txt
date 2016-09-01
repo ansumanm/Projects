@@ -1,0 +1,17 @@
+TEST #1 {
+Description = "Match case";
+String = "A quick brown fox jumps over the lazy dog.";
+Pattern = "lazy";
+}
+
+TEST #2 {
+Description = "Match fail case"
+String = "A quick brown fox jumps over the lazy dog.";
+Pattern = "crazy";
+}
+
+TEST #3 {
+Description = "Match fail case: partial match";
+String = "A quick brown fox jumps over the lazy dog.";
+Pattern = "overt";
+}
