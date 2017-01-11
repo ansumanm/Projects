@@ -1,0 +1,11 @@
+To build, just execute "make". You might have to link it with the rt library using "-lrt" if linking fails.
+"make clean" to clean the binaries.
+
+Steps to run:-
+
+Execute: (./p1 &);(./p2)
+
+Output:
+
+$ (./p1 &);(./p2)
+AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz
