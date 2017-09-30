@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
 # Trading app.
+# Tesing edit..
 
 import ssl
 from nsetools import Nse
