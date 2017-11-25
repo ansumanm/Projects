@@ -1,4 +1,0 @@
-timestamp,tradeable,mode,instrument_token,last_price,last_quantity,average_price,volume,buy_quantity,sell_quantity,open,high,low,close
-1511514951.9430568,True,quote,13873410,172.2,40,174.25,2007480,71760,82680,155.0,200.0,142.95,154.85
-1511514951.9430568,True,quote,13873666,126.25,80,133.13,1904000,83080,83800,157.3,166.8,112.0,172.25
-
