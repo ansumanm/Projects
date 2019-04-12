@@ -1,7 +1,7 @@
 #!/Users/ansuman/Github/Projects/python/virtualenv/bin/python
 #
 """
-Create a historical database of NSE stocks.
+Get the request token
 """
 
 from kiteconnect import KiteConnect

@@ -4,7 +4,6 @@
 The websocket publisher App. It receives ticks from zerodha for
 the subscribed instruments and publishes them over the port.
 """
-from kiteconnect import KiteConnect
 from kiteconnect import WebSocket
 import sys
 # import time
@@ -54,15 +53,6 @@ pe = {'instrument_token': '13873666', 'exchange_token': '54194',
       'lot_size': 40, 'instrument_type': 'PE', 'segment': 'NFO-OPT', 'exchange':
       'NFO'}
 """
-
-print("""
-      Creating kite context...
-      """)
-try:
-    kite = KiteConnect(api_key, api_secret)
-except Exception as e:
-    print(e)
-    sys.exit(1)
 
 print("""
       Initializing websocket...
