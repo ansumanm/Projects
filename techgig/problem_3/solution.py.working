@@ -1,0 +1,122 @@
+#!/usr/data/bin/python3
+
+import sys
+from itertools import combinations_with_replacement
+from itertools import permutations
+
+def main():
+    P,D = input().split()
+
+    # Get patients and doctors
+    P = int(P)
+    D = int(D)
+
+    # Get effort list
+    efforts_list = []
+    for e in range(0, D): 
+        e_list = list(map(int, input().split()))
+        efforts_list.append(e_list)
+
+    # Calculate min effort.
+    # Algo:
+    # Divide number the patients to groups.
+    # No. of groups = number of Doctors.
+    # Group size constraint: 0 <= G <= P
+    # For ex: 3 patients and 3 doctors
+    # [0, 0, [0, 1, 2]]
+    # [0, [0], [1, 2]]
+    # [0, [0, 1], [2]]
+    # [0, [0, 1, 2], 0]
+    # [[0], [0], [1, 2]]
+    # [[0], [1], [2]]
+    # [[0], [1, 2], 0]
+    # [[0, 1], [2], 0]
+    # [[0, 1, 2], 0, 0]
+
+    # effort_list_perm = list(permutations(efforts_list, D))
+
+    # print(efforts_list)
+    # print(effort_list_perm)
+
+    my_list = [*range(0, (P+1), 1)]
+
+    comb = combinations_with_replacement(my_list, D)
+
+    map(print, comb)
+
+    # Now filter the function
+    my_filtered_list = list(filter(lambda x: sum(list(x)) == P, list(comb)))
+
+    print(" Filtered list: ")
+    print(my_filtered_list)
+
+    my_final_list = []
+    # This filtered list has unique combinations. Process each element to 
+    # Generate the final list.
+    for element in list(my_filtered_list):
+        perm_list = list(permutations(list(element)))
+
+        for ele in perm_list:
+            my_final_list.append(ele)
+
+
+    print("My final list {}".format(my_final_list))
+
+    my_final_set = set(my_final_list)
+    my_unique_final_list = list(my_final_set)
+
+    print("My unique final list {}".format(my_unique_final_list))
+    min_effort = sys.maxsize
+
+    for each_tuple in my_unique_final_list:
+        each_list = list(each_tuple)
+        start = 0
+        stop = 0
+        sum_of_effort = 0
+
+        print("""
+        --------------
+        each_list {} 
+        --------------
+        """.format(each_list))
+        # print("Each list: {}".format(each_list))
+        # [1, 2, 2]
+        # Index of the list above is index into the
+        # effort_list. 
+        # Value of this the number of elements to be
+        # read from effort list. We have to compute 
+        # the start and stop for the list.
+        for i in range(0, len(each_list), 1):
+            # effort [1, 2, 3, 4, 5, 6]
+            effort = efforts_list[i]
+            print("effort: {}".format(effort))
+
+            num_elements = each_list[i]
+            print("num_elements: {}".format(num_elements))
+
+            if num_elements == 0:
+                # We are reading 0 efforts from this doctor
+                continue
+
+            stop = start + num_elements
+            print("start: {} stop {}".format(start, stop))
+
+            sub_list = effort[start:stop]
+            print("sublist: {}".format(sub_list))
+
+            sum_of_effort += sum(sub_list)
+            print("sum_of_effort: {}".format(sum_of_effort))
+
+            start = stop
+
+        if sum_of_effort < min_effort:
+            min_effort = sum_of_effort
+            print("Min effort: %d" % min_effort)
+            print("+++++++++++ Each list: {} ++++++++++++++++".format(each_list))
+
+    # print("Final min effort: %d" % min_effort)
+    print(min_effort)
+
+
+main()
+
