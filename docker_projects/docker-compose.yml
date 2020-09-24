@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+        influxdb-service:
+                image: 'influxdb:latest'
+                container_name: influxdb
+                ports:
+                        - "8083:8083"
+                        - "8086:8086"
+                        - "8090:8090"
+                env_file:
+                        - 'env.influxdb'
+                volumes:
+                        # sudo mkdir -p /srv/docker/influxdb/data
+                        - /Users/ansuman/Desktop/DEV/srv/docker/influxdb/data:/var/lib/influxdb
+
+        grafana-service:
+                image: 'grafana/grafana:latest'
+                container_name: grafana
+                ports:
+                        - "4000:3000"
+                env_file:
+                        - 'env.grafana'
+                links:
+                        - influxdb-service
+                volumes:
+                        # Data Persistency
+                        # mkdir -p /srv/docker/grafana/data; chown 472:472 /srv/docker/grafana/data
+                        - /Users/ansuman/Desktop/DEV/srv/docker/grafana/data:/var/lib/grafana
+
+        ubuntu-service:
+                image: 'ubuntu:18.04'
+                container_name: ubuntu
+                volumes:
+                        # sudo mkdir -p /srv/docker/influxdb/data
+                        - /Users/ansuman/Desktop/DEV/docker_volume/ubuntu_data:/usr/data
+                command: ["/bin/bash"]
+                stdin_open: true
+                tty: true
+
+        python3-service:
+                build:
+                    context: .
+                    dockerfile: Dockerfile
+                container_name: python3_container
+                volumes:
+                        # sudo mkdir -p /srv/docker/influxdb/data
+                        - /Users/ansuman/Desktop/DEV/docker_volume:/usr/data
+                command: ["/bin/bash"]
+                stdin_open: true
+                tty: true
